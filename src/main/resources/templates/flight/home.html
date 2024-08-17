@@ -12,6 +12,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
         <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
         <script src="/js/toastr.min.js"></script>
 
     </head>
@@ -156,15 +157,19 @@
 
     <!-- Ảnh dưới cùng-->
     <section class="wow fadeInUp" data-wow-duration="2s">
-        <div class="d-flex justify-content-center">
-            <img src="/images/maybaytq.jpg" alt="" class="rounded-3">
+        <div class="container">
+            <img src="/images/footer-img-1.jpg" alt="" class="rounded-3 w-100">
         </div>
     </section>
 
     <!-- Nút cuộn trang lên đầu -->
-    <button id="scrollToTop" class="btn btn-primary">
-        <i class="fa-solid fa-arrow-up"></i>
-    </button>
+        <dotlottie-player
+                id="scrollToTop"
+                src="https://lottie.host/f90124be-3592-4015-9d47-198363a9e687/11XQzibSHV.json"
+                background="transparent" speed="1" style="width: 80px; height: 80px;" loop autoplay>
+
+        </dotlottie-player>
+
     <section class="wow fadeInUp" data-wow-duration="2s">
         <div th:replace="common/layout.html :: footer"></div>
     </section>

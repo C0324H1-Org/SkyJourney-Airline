@@ -3,26 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý ghế ngồi - SkyJourney</title>
+    <title>Quản lý người dùng - SkyJourney</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="../../../../../../src/main/resources/static/css/seat-management.css">
+    <link rel="stylesheet" href="/css/user-management.css">
 </head>
 <body>
-
 <div class="sidebar">
     <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
-    <a href="user-management.html"><i class="fas fa-user"></i> Quản lý người dùng</a>
-    <a href="flight/flight-management.html"><i class="fas fa-plane"></i> Quản lý chuyến bay</a>
-    <a href="seat-management.html"><i class="fas fa-chair"></i> Quản lý ghế ngồi</a>
-    <a href="booking-management.html"><i class="fas fa-ticket-alt"></i> Quản lý đặt vé</a>
-    <a href="airport-management.html"><i class="fas fa-globe"></i> Quản lý sân bay</a>
-    <a href="#"><i class="fas fa-comments"></i> Quản lý phản hồi</a>
-    <a href="#"><i class="fas fa-chart-line"></i> Báo cáo</a>
+    <a href="http://localhost:8080/admin/users"><i class="fas fa-user"></i> Quản lý người dùng</a>
+    <a href="http://localhost:8080/admin/flights"><i class="fas fa-plane"></i> Quản lý chuyến bay</a>
+    <a href="http://localhost:8080/admin/airports"><i class="fas fa-globe"></i> Quản lý sân bay</a>
 </div>
-
 <div class="content">
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">SkyJourney Admin</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,7 +25,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-bell"></i><span class="badge">3</span></a>
+                        <a class="nav-link" href="#"><i class="fas fa-bell"></i><span class="badge bg-danger">3</span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -48,34 +42,56 @@
             </div>
         </div>
     </nav>
-
     <div class="container mt-5">
         <div class="card">
             <div class="card-header">
-                Quản lý ghế ngồi
+                Quản lý người dùng
             </div>
             <div class="card-body">
-                <button class="btn btn-primary mb-3">+ Thêm ghế ngồi</button>
+                <!-- Hiển thị thông báo thành công -->
+                <div th:if="${message}" class="alert alert-success" role="alert">
+                    <p th:text="${message}"></p>
+                </div>
+                <!-- Hiển thị thông báo lỗi -->
+                <div th:if="${error}" class="alert alert-danger" role="alert">
+                    <p th:text="${error}"></p>
+                </div>
                 <table class="table table-hover">
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Mã ghế</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
                         <th>Trạng thái</th>
-                        <th>Chỉnh sửa</th>
+                        <th>Vai trò</th>
+                        <th>Hành động</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>A1</td>
-                        <td><span class="badge bg-success">Trống</span></td>
+                    <tr th:each="user : ${users}">
+                        <td th:text="${user.id}"></td>
+                        <td th:text="${user.fullname}"></td>
+                        <td th:text="${user.email}"></td>
+                        <td th:text="${user.address}"></td>
+                        <td th:text="${user.phone}"></td>
+                        <td th:text="${user.activated ? 'Kích hoạt' : 'Chưa kích hoạt'}"></td>
                         <td>
-                            <button class="btn btn-info btn-sm"><i class="fas fa-edit"></i></button>
-                            <button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>
+                            <ul>
+                                <li th:each="role : ${user.roles}" th:text="${role.role.name}"></li>
+                            </ul>
+                        </td>
+
+                        <td>
+                            <a href="#" class="btn btn-info btn-sm" th:href="@{/admin/users/view/{id}(id=${user.id})}">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a href="#" class="btn btn-warning btn-sm" th:href="@{/admin/users/edit/{id}(id=${user.id})}">
+                                <i class="fas fa-edit"></i>
+                            </a>
                         </td>
                     </tr>
-                    <!-- Add more rows as needed -->
                     </tbody>
                 </table>
             </div>
