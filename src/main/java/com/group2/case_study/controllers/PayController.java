@@ -29,12 +29,7 @@ public class PayController {
     public String showPay(@RequestParam("flightId") int flightId,
                           HttpSession session, Model model) {
         Flight flight = flightService.getFlightById(flightId);
-        List<Integer> seatIds = (List<Integer>) session.getAttribute("seats");
-        List<Seat> seats = new ArrayList<>();
-        for (Integer seatId : seatIds) {
-            Seat seat = seatService.findById(seatId);
-            seats.add(seat);
-        }
+        List<Seat> seats = seatService.findAllSeat();
         model.addAttribute("flight", flight);
         model.addAttribute("seats", seats);
         return "pay/show-pay";

@@ -40,5 +40,6 @@ public interface ISeatRepository extends JpaRepository<Seat, Integer> {
     @Transactional
     void deleteAllByFlight_FlightId(Integer flightId);
 
-
+    @Query("SELECT s FROM Seat s WHERE s.availabilityStatus = 'BOOKED'")
+    List<Seat> findAllBookedSeats();
 }
