@@ -30,16 +30,17 @@ public interface ISeatRepository extends JpaRepository<Seat, Integer> {
 
     @Modifying
     @Transactional
-    @Query("UPDATE Seat s SET s.availabilityStatus = 'available', s.holdExpiration = NULL WHERE s.availabilityStatus = 'BOOKED' AND s.holdExpiration < :now")
+    @Query("UPDATE Seat s SET s.availabilityStatus = 'AVAILABLE', s.holdExpiration = NULL WHERE s.availabilityStatus = 'BOOKED' AND s.holdExpiration < :now")
     void updateSeatsToAvailableIfExpired(LocalDateTime now);
 
-    @Query("SELECT COUNT(s) FROM Seat s WHERE s.flight.flightId = :flightId AND s.availabilityStatus = 'available'")
+    @Query("SELECT COUNT(s) FROM Seat s WHERE s.flight.flightId = :flightId AND s.availabilityStatus = 'AVAILABLE'")
     long countAvailableSeatsByFlightId(Integer flightId);
 
     @Modifying
     @Transactional
     void deleteAllByFlight_FlightId(Integer flightId);
 
-    @Query("SELECT s FROM Seat s WHERE s.availabilityStatus = 'BOOKED'")
-    List<Seat> findAllBookedSeats();
+    @Query("SELECT s FROM Seat s WHERE s.flight.flightId = :flightId AND s.availabilityStatus = CONCAT('BOOKED', :id)")
+    List<Seat> findAllSeat(@Param("flightId") int flightId, @Param("id") int id);
+
 }
