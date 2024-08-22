@@ -19,5 +19,5 @@ public interface ISeatService {
 
     Seat findById(Integer seatId);
 
-    List<Seat> findAllSeat();
+    List<Seat> findAllSeat(int flightId, int id);
 }

@@ -21,4 +21,8 @@ public interface IFlightService {
     List<Airport> getArrivalAirportsByDeparture(Integer departureAirportId, LocalDateTime currentTime);
 
     List<Flight> findAllFlightsByCurrentDate(Integer departureAirportId, Integer arrivalAirportId);
+
+    void saveUserId(Integer flightId, int id);
+
+    void removeUserId(int flightId);
 }

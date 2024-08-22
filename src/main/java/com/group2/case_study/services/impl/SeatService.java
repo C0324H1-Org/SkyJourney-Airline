@@ -55,7 +55,8 @@ public class SeatService implements ISeatService {
     }
 
     @Override
-    public List<Seat> findAllSeat() {
-        return seatRepository.findAllBookedSeats();
+    public List<Seat> findAllSeat(int flightId, int id) {
+        return seatRepository.findAllSeat(flightId,id);
     }
+
 }
