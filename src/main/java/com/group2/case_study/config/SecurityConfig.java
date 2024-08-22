@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.access.AccessDeniedHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -44,6 +45,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/login", "/logoutSuccessful", "/register", "/ticket/**", "/css/**", "/js/**", "/images/**", "/video/**", "/", "/flights/search", "/booked", "/introduction", "/api/airports/arrival").permitAll()
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/logout").authenticated()
                                 .anyRequest().authenticated()
                 )
@@ -61,7 +63,18 @@ public class SecurityConfig {
                                 .invalidateHttpSession(true)
                                 .logoutUrl("/logout")
                                 .logoutSuccessUrl("/")
+                )
+                .exceptionHandling(exceptionHandling ->
+                        exceptionHandling
+                                .accessDeniedHandler(accessDeniedHandler())
                 );
         return http.build();
+    }
+
+    @Bean
+    public AccessDeniedHandler accessDeniedHandler() {
+        return (request, response, accessDeniedException) -> {
+            response.sendRedirect("/403");
+        };
     }
 }

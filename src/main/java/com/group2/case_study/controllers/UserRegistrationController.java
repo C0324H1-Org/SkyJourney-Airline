@@ -21,9 +21,10 @@ public class UserRegistrationController {
     public String registerUser(@ModelAttribute("user") User user, RedirectAttributes redirectAttributes) {
         try {
             registrationService.registerNewUser(user, "ROLE_CUSTOMER");
+            redirectAttributes.addFlashAttribute("success", "Đăng ký tài khoản thành công!");
             return "redirect:/login";
         } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            redirectAttributes.addFlashAttribute("error","Đăng ký tài khoản thất bại!");
             return "redirect:/login";
         }
     }

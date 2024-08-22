@@ -172,3 +172,40 @@ $(document).ready(function () {
     });
 });
 
+$('.bookNowButton').on('click', function() {
+    let targetOffset = $('#booking').offset().top;
+    let windowHeight = $(window).height();
+    let elementHeight = $('#booking').outerHeight();
+
+    $('html, body').animate({
+        scrollTop: targetOffset - (windowHeight / 2) + (elementHeight / 2)
+    }, 100);
+});
+
+document.getElementById('btn-check-booking').addEventListener('click', function (e) {
+    e.preventDefault();
+
+    // Kiểm tra xem có đang ở trang chủ hay không
+    if (window.location.pathname === '/') {
+        // Cuộn đến phần "Tra Cứu" nếu đang ở trang chủ
+        let targetOffset = $('#check-booking').offset().top;
+        let windowHeight = $(window).height();
+        let elementHeight = $('#check-booking').outerHeight();
+
+        $('html, body').animate({
+            scrollTop: targetOffset - (windowHeight / 2) + (elementHeight / 2)
+        }, 100);
+    } else {
+        window.location.href = "/";
+
+        $(document).ready( () => {
+            let targetOffset = $('#check-booking').offset().top;
+            let windowHeight = $(window).height();
+            let elementHeight = $('#check-booking').outerHeight();
+            $('html, body').animate({
+                scrollTop: targetOffset - (windowHeight / 2) + (elementHeight / 2)
+            }, 100);
+        })
+
+    }
+});

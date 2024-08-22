@@ -36,12 +36,12 @@ body {
 }
 
 .card-header {
-    background-color: #003366;
-    color: white;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 1rem;
+    background-color: #003366 !important;
+    color: white !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 1px !important;
+    padding: 1rem !important;
 }
 
 .header-null {
@@ -74,8 +74,8 @@ body {
 }
 
 .ticket-icon {
-    font-size: 2.5rem;
-    color: #003366;
+    font-size: 2.5rem !important;
+    color: #003366 !important;
 }
 
 .ticket-details h5 {
@@ -230,4 +230,8 @@ footer a i {
 .img-payment {
     width: 320px;
     height: auto;
+}
+
+.main-container {
+    margin-top: 100px;
 }
