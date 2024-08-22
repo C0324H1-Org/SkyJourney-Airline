@@ -53,4 +53,9 @@ public class SeatService implements ISeatService {
     public Seat findById(Integer seatId) {
         return seatRepository.findById(seatId).orElse(null);
     }
+
+    @Override
+    public List<Seat> findAllSeat() {
+        return seatRepository.findAllBookedSeats();
+    }
 }
