@@ -4,22 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <title>Thanh toán</title>
     <style>
         .info {
             font-weight: bold;
             font-size: 20px;
         }
+        .main-container {
+            margin-top: 100px;
+        }
     </style>
+    <th:block th:replace="~{/common/layout :: head}"></th:block>
 </head>
 
 <body>
-<div class="container">
+<th:block th:replace="~{/common/layout :: navbar}"></th:block>
+
+<div class="container main-container">
     <div class="row justify-content-center mt-5">
         <div class="col-md-6">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body p-5">
                     <img th:src="@{/images/vnpay-logo.png}" style="width: 200px">
                     <h2 class="card-title">Xác nhận thông tin</h2>
                     <form th:action="@{/vnp/submitOrder/{flightId}(flightId=${flightId})}" method="post">
@@ -37,7 +42,10 @@
                             <input type="hidden" name="amount" th:value="${#numbers.formatDecimal(ticketPrice, 0,0)}"/>
                             <input type="hidden" name="orderInfo" th:value="Order"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Xác nhận thanh toán</button>
+                        <div class="d-flex justify-content-center mt-4">
+                            <button type="submit" class="btn btn-primary">Xác nhận thanh toán</button>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -45,9 +53,8 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<th:block th:replace="~{/common/layout :: footer}"></th:block>
 </body>
 
 </html>

@@ -23,9 +23,6 @@ public class SeatController {
     @Autowired
     private IFlightService flightService;
 
-    @Autowired
-    private IUserService userService;
-
     @GetMapping("/{flightId}/seats")
     public String getSeatByFlightId(@PathVariable Integer flightId, Model model) {
         List<List<Seat>> seatRows = seatService.getSeatsGroupedByRows(flightId);
@@ -36,19 +33,6 @@ public class SeatController {
             model.addAttribute("seatPrice", flight.getPrice());
         }
         return "seat/seat-re";
-    }
-
-    @PostMapping("/{flightId}/confirm-booking")
-    public String confirmBooking(@PathVariable Integer flightId,
-                                 @RequestParam("seatIds") List<Integer> seatIds,
-                                 HttpSession session) {
-        LocalDateTime holdExpiration = LocalDateTime.now().plusMinutes(1);
-        String userName = (String) session.getAttribute("username");
-        int id = userService.findIdByUserName(userName);
-        seatService.updateSeatStatus(seatIds, "BOOKED" + id, holdExpiration);
-        flightService.saveUserId(flightId,id);
-        session.setAttribute("seats", seatIds);
-        return "redirect:/flights/" + flightId + "/seats";
     }
 
 }
