@@ -4,6 +4,7 @@ import com.group2.case_study.models.Flight;
 import com.group2.case_study.models.Seat;
 import com.group2.case_study.services.IFlightService;
 import com.group2.case_study.services.ISeatService;
+import com.group2.case_study.services.impl.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,11 +26,17 @@ public class PayController {
     @Autowired
     private ISeatService seatService;
 
+    @Autowired
+    private UserService userService;
+
     @PostMapping
     public String showPay(@RequestParam("flightId") int flightId,
-                          HttpSession session, Model model) {
+                          HttpSession session,
+                          Model model) {
         Flight flight = flightService.getFlightById(flightId);
-        List<Seat> seats = seatService.findAllSeat();
+        String userName = (String) session.getAttribute("username");
+        int id = userService.findIdByUserName(userName);
+        List<Seat> seats = seatService.findAllSeat(flightId,id);
         model.addAttribute("flight", flight);
         model.addAttribute("seats", seats);
         return "pay/show-pay";

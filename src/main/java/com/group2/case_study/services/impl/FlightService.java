@@ -60,4 +60,14 @@ public class FlightService implements IFlightService {
         LocalDateTime currentDateTime = LocalDateTime.now();
         return flightRepository.findAllFlightByCurrentDateAndAirportId(departureAirportId, arrivalAirportId, currentDateTime);
     }
+
+    @Override
+    public void saveUserId(Integer flightId, int id) {
+        flightRepository.updateUserForFlight(flightId, id);
+    }
+
+    @Override
+    public void removeUserId(int flightId) {
+        flightRepository.removeUserFromFlight(flightId);
+    }
 }

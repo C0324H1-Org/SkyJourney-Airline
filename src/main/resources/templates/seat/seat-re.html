@@ -44,8 +44,8 @@
                     <li th:classappend="'row--' + ${stat.count}">
                         <ol class="seats" type="A">
                             <li th:each="row : ${seatRow}" class="seat">
-                                <input th:attr="disabled = ${row.availabilityStatus == 'available' ? null : 'disabled'}"
-                                       th:classappend="${row.availabilityStatus == 'available' ? 'available' : 'unavailable'}"
+                                <input th:attr="disabled = ${row.availabilityStatus == 'AVAILABLE' ? null : 'disabled'}"
+                                       th:classappend="${row.availabilityStatus == 'AVAILABLE' ? 'available' : 'unavailable'}"
                                        type="checkbox" th:id="${row.seatNumber}" th:data-seat-id="${row.seatId}"
                                        th:data-availability="${row.availabilityStatus}"
                                        onclick="toggleSeat(this)"/>

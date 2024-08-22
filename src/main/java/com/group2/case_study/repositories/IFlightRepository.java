@@ -2,7 +2,9 @@ package com.group2.case_study.repositories;
 
 import com.group2.case_study.models.Airport;
 import com.group2.case_study.models.Flight;
+import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -41,4 +43,14 @@ public interface IFlightRepository extends JpaRepository<Flight, Integer> {
             @Param("arrivalAirportId") Integer arrivalAirportId,
             @Param("currentDateTime") LocalDateTime currentDateTime
     );
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Flight f SET f.user.id = :userId WHERE f.flightId = :flightId")
+    void updateUserForFlight(@Param("flightId") Integer flightId, @Param("userId") Integer userId);
+
+    @Modifying
+    @Transactional
+    @Query("UPDATE Flight f SET f.user = NULL WHERE f.flightId = :flightId")
+    void removeUserFromFlight(@Param("flightId") Integer flightId);
 }

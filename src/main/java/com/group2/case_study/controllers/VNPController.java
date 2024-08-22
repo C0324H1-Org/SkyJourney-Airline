@@ -146,6 +146,7 @@ public class VNPController {
             }
             seatService.updateSeatStatusConfig(seatIds, "unavailable");
         }
+        flightService.removeUserId(flightId);
         return paymentStatus == 1 ? "vnp/ordersuccess" : "vnp/orderfail";
     }
 
