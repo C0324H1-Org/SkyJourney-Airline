@@ -10,7 +10,6 @@
 </head>
 <body>
 <div class="sidebar">
-    <a href="dashboard.html"><i class="fas fa-tachometer-alt"></i> Bảng điều khiển</a>
     <a href="http://localhost:8080/admin/users"><i class="fas fa-user"></i> Quản lý người dùng</a>
     <a href="http://localhost:8080/admin/flights"><i class="fas fa-plane"></i> Quản lý chuyến bay</a>
     <a href="http://localhost:8080/admin/airports"><i class="fas fa-globe"></i> Quản lý sân bay</a>
@@ -106,7 +105,7 @@
                 Bạn có chắc chắn muốn xóa sân bay này?
             </div>
             <div class="modal-footer">
-                <form id="deleteForm" method="post" action="">
+                <form id="deleteForm" method="get" action="">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                     <button type="submit" class="btn btn-danger">Xóa</button>
                 </form>
