@@ -75,6 +75,7 @@
                 <input class="form-control" type="text" id="address" name="address" required>
             </fieldset>
             <div class="d-flex justify-content-center">
+                <a th:href="@{/flights/{id}/seats(id=${flight.flightId})}" class="btn btn-secondary mt-5 w-25 me-4">Trở Lại</a>
                 <button type="submit" class="btn btn-primary mt-5 w-25">Thanh Toán</button>
             </div>
 
