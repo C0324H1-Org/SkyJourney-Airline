@@ -24,6 +24,22 @@ function updateSeatInputValue() {
 }
 
 function toggleSeat(seatElement) {
+    //
+    // if (seatElement.dataset.availability !== 'AVAILABLE') {
+    //     seatElement.checked = false;
+    //     return;
+    // }
+    //
+    // const seatId = seatElement.dataset.seatId;
+    // const isSelected = seatElement.checked;
+    //
+    // const message = JSON.stringify({
+    //     seatId,
+    //     isSelected,
+    //     availability: seatElement.dataset.availability
+    // });
+    //
+    // socket.send(message);
     const selected = document.querySelectorAll('.seat .selected');
     if (selected.length > 9 && seatElement.checked) {
         Swal.fire({
@@ -43,4 +59,6 @@ function toggleSeat(seatElement) {
 document.querySelector('form[action="/pay"]').addEventListener('submit', function() {
     updateSeatInputValue();
 });
+
+
 

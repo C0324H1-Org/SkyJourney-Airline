@@ -37,7 +37,7 @@ public class PayController {
                           @RequestParam("seatIds") List<Integer> seatIds,
                           Principal principal,
                           Model model) {
-        LocalDateTime holdExpiration = LocalDateTime.now().plusMinutes(1);
+        LocalDateTime holdExpiration = LocalDateTime.now().plusMinutes(2);
         String userName = principal.getName();
         int id = userService.findIdByUserName(userName);
         seatService.updateSeatStatus(seatIds, "BOOKED" + id, holdExpiration);
@@ -49,5 +49,4 @@ public class PayController {
         model.addAttribute("seats", seats);
         return "pay/show-pay";
     }
-
 }
