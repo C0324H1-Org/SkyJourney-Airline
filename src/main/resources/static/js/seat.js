@@ -44,3 +44,5 @@ document.querySelector('form[action="/pay"]').addEventListener('submit', functio
     updateSeatInputValue();
 });
 
+
+
