@@ -15,10 +15,8 @@ function updateSummary() {
 }
 
 function updateSeatInputValue() {
-    // Lấy dữ liệu từ thẻ có id là selected-seats
-    let selectedSeatsText = document.getElementById('selected-seats').innerText;
 
-    // Chọn thẻ input có name là seat và gán giá trị vào
+    let selectedSeatsText = document.getElementById('selected-seats').innerText;
     let seatInput = document.getElementById('seat-input');
     seatInput.value = selectedSeatsText;
 }
